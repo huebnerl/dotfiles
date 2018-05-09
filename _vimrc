@@ -5,6 +5,15 @@
 " Lars Hübner
 " 22. April 2018
 "
+" Used Plugins
+" https://github.com/tpope/vim-pathogen.git
+" https://github.com/flazz/vim-colorschemes.git
+" https://github.com/scrooloose/nerdtree.git
+" https://github.com/prabirshrestha/async.vim.git
+" https://github.com/prabirshrestha/vim-lsp.git
+" https://github.com/vim-scripts/AutoComplPop.git
+" https://github.com/tpope/vim-fugitive.git
+"
 
 " start pathogen
 execute pathogen#infect()
@@ -23,6 +32,7 @@ set nocompatible
 " fix some issues with windows
 " as info: you can paste with shift-insert
 set backspace=2
+set shiftwidth=4
 set tabstop=4
 set textwidth=100
 
@@ -46,6 +56,8 @@ colorscheme darcula
 nnoremap ,k <Esc>:NERDTreeToggle<CR>
 
 set encoding=utf-8
+
+noremap <C-j> <C-]>
 
 " python setup -------------------------------------------------
 if executable('pyls')
@@ -75,6 +87,7 @@ if executable('cquery')
 endif
 
 autocmd Filetype cpp nnoremap <F5> <Esc>:w ! g++ % && a.exe<CR>
+autocmd Filetype c nnoremap <F5> <Esc>:w ! gcc % && a.exe<CR>
 
 autocmd Filetype cpp nnoremap <F6> <Esc>:w ! echo.) > CMakeLists.txt & echo add_executable(%:t:r %:t) >> CMakeLists.txt
 autocmd Filetype cpp nnoremap <F7> <Esc>:w ! mkdir build<CR>
@@ -87,7 +100,11 @@ autocmd FileType cpp inoremap ,nn <Esc>/<++><Enter>"_c4l
 autocmd FileType h inoremap  ,nn <Esc>/<++><Enter>"_c4l
 
 autocmd FileType cpp inoremap ,im int<Space>main(int<Space>argc,<Space>char*<Space>argv[]){<Enter><Enter>return<Space>0;<Enter>}<Esc>kki<Tab>
-autocmd FileType cpp inoremap ,fi for<Space>(int<Space>i<Space>=<Space>0;<Space>i<Space><<Space><++>;<Space>++i){<Enter><++><Enter>}<Esc>/<++><Enter>"_c4l
+" autocmd FileType cpp inoremap ,fi for<Space>(int<Space>i<Space>=<Space>0;<Space>i<Space><<Space><++>;<Space>++i){<Enter><++><Enter>}<Esc>/<++><Enter>"_c4l
+
+" alternative is using snippets through loading them from a file
+autocmd FileType cpp inoremap ,fi <Esc>:-1read c:\Program\ Files\ (x86)\Vim\snippets\forloop.cpp <CR>2f;i
+
 autocmd FileType cpp inoremap ,co std::cout<Space><<<Space>"<++>"<Space><<<Space>std::endl;<Enter><++><Esc>/<++><Enter>"_c4l
 autocmd FileType cpp inoremap ,ci std::cin<Space>>><Space>;<Esc>i
 autocmd FileType cpp inoremap ,wl while<Space>(<++>){<Enter><++><Enter>}<Esc>/<++><Enter>"_c4l
